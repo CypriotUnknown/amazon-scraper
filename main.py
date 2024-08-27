@@ -2,7 +2,7 @@ from os import getenv
 from dotenv import load_dotenv
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
-from amazon_scraper.spiders.search_products import SearchProductsSpider
+from product_scraper.spiders.amazon import AmazonSpider
 
 
 def main():
@@ -17,9 +17,7 @@ def main():
     process = CrawlerProcess(settings)
 
     # Add the spider to the process
-    process.crawl(
-        SearchProductsSpider, **{"search": search, "url_ending": url_host_ending}
-    )
+    process.crawl(AmazonSpider, **{"search": search, "url_ending": url_host_ending})
 
     # Start the crawling process
     process.start()

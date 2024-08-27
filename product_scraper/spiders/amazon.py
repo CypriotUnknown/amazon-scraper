@@ -5,17 +5,18 @@ from typing import Any
 from requests.models import PreparedRequest
 
 
-class SearchProductsSpider(scrapy.Spider):
-    name = "search-products"
-    allowed_domains = ["www.amazon.de"]
-
+class AmazonSpider(scrapy.Spider):
+    name = "amazon"
     custom_settings = {
-        "FEEDS": {"amazon.json": {"format": "json", "indent": 4, "overwrite": True}}
+        "FEEDS": {
+            "data/amazon.json": {"format": "json", "indent": 4, "overwrite": True}
+        }
     }
 
     def __init__(self, name: str | None = None, **kwargs: Any):
         super().__init__(name, **kwargs)
         url_ending = kwargs.get("url_ending")
+        self.allowed_domains = [f"www.amazon.{url_ending}"]
         self.base_url = f"https://www.amazon.{url_ending}"
 
         req = PreparedRequest()

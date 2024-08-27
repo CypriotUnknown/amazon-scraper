@@ -12,7 +12,7 @@ The scraper requires two environment variables:
 
 ## Output
 
-The output data is stored in the root folder in the file `amazon.json`.
+The output data is stored in `data/amazon.json`.
 
 ## RUN
 
